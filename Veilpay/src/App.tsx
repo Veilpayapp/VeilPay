@@ -3,6 +3,7 @@ import { AnimatePresence } from 'framer-motion';
 import Preloader from './components/Preloader';
 import GlassNavbar from './components/GlassNavbar';
 import ScrollSequence from './components/ScrollSequence';
+import BrutalistFooter from './components/BrutalistFooter';
 import './App.css';
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
             <div key="main" className="relative">
               <GlassNavbar />
               <ScrollSequence />
-              {/* Additional page content can be appended here */}
+              <BrutalistFooter />
             </div>
           </>
         )}
