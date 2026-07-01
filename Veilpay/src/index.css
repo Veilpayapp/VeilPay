@@ -5,6 +5,13 @@
   --color-gold-400: #facc15;
   --color-gold-200: #fde047;
   --color-amber-300: #fbbf24;
+  
+  /* Shadcn UI Default Theme Variables */
+  --color-primary: #fbbf24;
+  --color-primary-foreground: #000000;
+  --color-ring: #fbbf24;
+  --color-background: #000000;
+  --color-foreground: #ffffff;
 }
 
 html, body, #root {

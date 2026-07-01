@@ -1,4 +1,6 @@
+import { useMemo } from 'react';
 import { motion } from 'framer-motion';
+import { getNextCryptoLogo } from './CryptoLogos';
 
 interface FloatingCoinProps {
   delay?: number;
@@ -11,6 +13,8 @@ export default function FloatingCoin({
   side = 'left',
   size = 64,
 }: FloatingCoinProps) {
+  const logo = useMemo(() => getNextCryptoLogo(), []);
+
   return (
     <motion.div
       animate={{ y: [-10, 10, -10] }}
@@ -28,21 +32,13 @@ export default function FloatingCoin({
           height: size,
           borderRadius: '50%',
           background:
-            'radial-gradient(circle at 30% 30%, #e5e7eb, #9ca3af, #4b5563)',
+            'radial-gradient(circle at 45% 35%, #ffffff 0%, #d8d8d8 20%, #b0b0b0 50%, #787878 80%, #4a4a4a 100%)',
           boxShadow:
-            'inset -4px -4px 8px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.4)',
+            '0 0 0 3px #aaa, 0 0 0 5px #666, 0 6px 20px rgba(0,0,0,0.7)',
         }}
-        className="flex items-center justify-center"
+        className="relative flex items-center justify-center before:content-[''] before:absolute before:inset-[6px] before:rounded-full before:border-[1.5px] before:border-white/40"
       >
-        <div
-          style={{
-            width: size * 0.7,
-            height: size * 0.7,
-            borderRadius: '50%',
-            background:
-              'radial-gradient(circle at 30% 30%, #f3f4f6, #d1d5db, #6b7280)',
-          }}
-        />
+        {logo}
       </div>
     </motion.div>
   );

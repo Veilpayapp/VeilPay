@@ -20,7 +20,7 @@ const VolumetricGlow = forwardRef<HTMLDivElement>((_, ref) => {
         className="absolute inset-0 rounded-full"
         style={{
           background:
-            'radial-gradient(ellipse at center, rgba(0, 240, 255, 0.15) 0%, rgba(0, 200, 255, 0.08) 40%, transparent 70%)',
+            'radial-gradient(ellipse at center, rgba(251, 191, 36, 0.15) 0%, rgba(245, 158, 11, 0.08) 40%, transparent 70%)',
           filter: 'blur(60px)',
           width: '100%',
           height: '100%',
@@ -31,7 +31,7 @@ const VolumetricGlow = forwardRef<HTMLDivElement>((_, ref) => {
         className="absolute inset-0 rounded-full"
         style={{
           background:
-            'radial-gradient(ellipse at center, rgba(255, 255, 255, 0.2) 0%, rgba(0, 240, 255, 0.12) 30%, transparent 60%)',
+            'radial-gradient(ellipse at center, rgba(255, 255, 255, 0.2) 0%, rgba(251, 191, 36, 0.12) 30%, transparent 60%)',
           filter: 'blur(40px)',
           width: '70%',
           height: '80%',
@@ -46,7 +46,7 @@ const VolumetricGlow = forwardRef<HTMLDivElement>((_, ref) => {
           width: '200px',
           height: '300px',
           background:
-            'radial-gradient(ellipse at center, rgba(255,255,255,0.35) 0%, rgba(0, 240, 255, 0.15) 40%, transparent 70%)',
+            'radial-gradient(ellipse at center, rgba(255,255,255,0.35) 0%, rgba(251, 191, 36, 0.15) 40%, transparent 70%)',
           filter: 'blur(30px)',
         }}
       />
@@ -55,7 +55,7 @@ const VolumetricGlow = forwardRef<HTMLDivElement>((_, ref) => {
         className="absolute left-1/2 top-0 h-full w-24 -translate-x-1/2"
         style={{
           background:
-            'linear-gradient(180deg, rgba(0, 240, 255, 0.08) 0%, transparent 60%)',
+            'linear-gradient(180deg, rgba(251, 191, 36, 0.08) 0%, transparent 60%)',
           filter: 'blur(20px)',
         }}
       />

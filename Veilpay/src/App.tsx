@@ -4,6 +4,7 @@ import Preloader from './components/Preloader';
 import GlassNavbar from './components/GlassNavbar';
 import ScrollSequence from './components/ScrollSequence';
 import BrutalistFooter from './components/BrutalistFooter';
+import SmoothScroll from './components/SmoothScroll';
 import './App.css';
 
 function App() {
@@ -20,11 +21,13 @@ function App() {
           <Preloader key="preloader" onComplete={handlePreloaderComplete} />
         ) : (
           <>
-            <div key="main" className="relative">
-              <GlassNavbar />
-              <ScrollSequence />
-              <BrutalistFooter />
-            </div>
+            <SmoothScroll>
+              <div key="main" className="relative">
+                <GlassNavbar />
+                <ScrollSequence />
+                <BrutalistFooter />
+              </div>
+            </SmoothScroll>
           </>
         )}
       </AnimatePresence>

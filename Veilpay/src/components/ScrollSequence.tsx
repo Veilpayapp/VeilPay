@@ -3,9 +3,10 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import MeshGrid from './MeshGrid';
 import IPhoneMockup from './IPhoneMockup';
-import SilverCoin from './SilverCoin';
+import CoinsScene from './CoinsScene';
 import VolumetricGlow from './VolumetricGlow';
 import FeatureCards from './FeatureCards';
+import HeroTitle from './HeroTitle';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,6 +21,7 @@ const ScrollSequence: React.FC = () => {
   const coinsInnerRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
 
   // Track refs to avoid re-runs without cleanup
   const stRef = useRef<ScrollTrigger | null>(null);
@@ -33,8 +35,9 @@ const ScrollSequence: React.FC = () => {
     const glow = glowRef.current;
     const cards = cardsRef.current;
     const coinsInner = coinsInnerRef.current;
+    const title = titleRef.current;
 
-    if (!container || !bg || !mesh || !phone || !coins || !glow || !cards || !coinsInner) return;
+    if (!container || !bg || !mesh || !phone || !coins || !glow || !cards || !coinsInner || !title) return;
 
     // ── Initial states before GSAP takes over ──
     gsap.set(bg, { opacity: 1 });
@@ -43,6 +46,7 @@ const ScrollSequence: React.FC = () => {
     gsap.set(coins, { opacity: 1, y: 0 });
     gsap.set(glow, { opacity: 0 });
     gsap.set(cards, { opacity: 0, y: 20 });
+    gsap.set(title, { opacity: 1, y: 0 });
 
     // ── Create a master timeline driven by scroll ──
     const tl = gsap.timeline({
@@ -89,6 +93,13 @@ const ScrollSequence: React.FC = () => {
     // ═════════════════════════════════════════════
     // STAGE 2: Layout Split & Parallax (30% - 70%)
     // ═════════════════════════════════════════════
+    // Title fades out and moves up
+    tl.to(
+      title,
+      { y: '-50vh', opacity: 0, duration: 0.3, ease: 'power2.in' },
+      0.2,
+    );
+
     // Heavy upward parallax on coins → drive out of viewport
     tl.to(
       coins,
@@ -97,9 +108,10 @@ const ScrollSequence: React.FC = () => {
     );
 
     // Phone translates to fixed right-third position
+    const phoneShift = window.innerWidth > 768 ? '25vw' : '10vw';
     tl.to(
       phone,
-      { x: '30vw', duration: 0.4, ease: 'power2.out' },
+      { x: phoneShift, duration: 0.4, ease: 'power2.out' },
       0.3,
     );
 
@@ -146,42 +158,24 @@ const ScrollSequence: React.FC = () => {
         <MeshGrid />
       </div>
 
-      {/* Silver Coins Layer — absolutely positioned, animated by GSAP */}
+      {/* 3D Coins Layer — animated by GSAP */}
       <div
         ref={coinsContainerRef}
         className="absolute inset-0 z-10 pointer-events-none"
       >
         <div ref={coinsInnerRef} className="relative h-full w-full">
-          {/* Left large coin */}
-          <div className="absolute top-1/2 left-4 md:left-16 lg:left-24 -translate-y-1/2">
-            <SilverCoin size={96} />
-          </div>
-          {/* Right large coin */}
-          <div className="absolute top-1/2 right-4 md:right-16 lg:right-24 -translate-y-1/2">
-            <SilverCoin size={120} />
-          </div>
-          {/* Mid-top coin */}
-          <div className="absolute top-1/4 left-1/4">
-            <SilverCoin size={64} />
-          </div>
-          {/* Mid-bottom coin */}
-          <div className="absolute bottom-1/3 right-1/3">
-            <SilverCoin size={80} />
-          </div>
-          {/* Lower left coin */}
-          <div className="absolute bottom-10 left-4">
-            <SilverCoin size={48} />
-          </div>
-          {/* Upper right coin */}
-          <div className="absolute top-10 right-1/2">
-            <SilverCoin size={56} />
-          </div>
+          <CoinsScene />
         </div>
       </div>
 
       {/* iPhone Mockup Layer (centered, then moves right) */}
-      <div ref={phoneRef} className="absolute inset-0 z-20 flex items-center justify-center">
+      <div ref={phoneRef} className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none mt-[25vh] md:mt-[30vh]">
         <IPhoneMockup />
+      </div>
+
+      {/* Hero Title Layer (center) */}
+      <div ref={titleRef} className="absolute inset-0 z-30 pointer-events-none flex items-center justify-center -mt-[15vh]">
+        <HeroTitle />
       </div>
 
       {/* Volumetric Glow Layer (behind phone, above coins) */}

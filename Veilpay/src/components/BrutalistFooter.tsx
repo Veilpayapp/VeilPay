@@ -1,4 +1,8 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
 
 const FOOTER_DATA = [
   {
@@ -29,24 +33,47 @@ const FOOTER_DATA = [
 
 const BrutalistFooter: React.FC = () => {
   return (
-    <footer className="relative z-40 w-full bg-black text-white">
-      {/* ─────────── Top separation line ─────────── */}
+    <footer className="relative z-40 w-full bg-black text-white overflow-hidden">
       <div className="w-full border-t border-white/10" />
 
-      {/* ─────────── Primary row: tagline + 3-column grid ─────────── */}
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 py-24 md:grid-cols-[1fr_2fr] md:px-12">
-        {/* Left / Tagline */}
-        <div className="flex h-full items-start">
-          <h3 className="text-2xl font-medium leading-tight text-white">
+      <motion.div 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 py-24 md:grid-cols-[1fr_2fr] md:px-12"
+      >
+        <div className="flex flex-col h-full items-start justify-between gap-8">
+          <h3 className="text-3xl font-bold tracking-tight leading-tight text-white max-w-[250px]">
             Experience the new standard.
           </h3>
+          
+          <div className="w-full max-w-xs space-y-3">
+            <h4 className="text-sm font-semibold text-gray-400">Join the Waitlist</h4>
+            <div className="flex gap-2">
+              <Input 
+                type="email" 
+                placeholder="Enter your email" 
+                className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus-visible:ring-amber-500 focus-visible:border-amber-500 rounded-lg"
+              />
+              <Button size="icon" className="bg-amber-500 hover:bg-amber-600 text-black rounded-lg">
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
         </div>
 
-        {/* Right / 3-column grid */}
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-3">
-          {FOOTER_DATA.map((col) => (
-            <div key={col.title} className="flex flex-col gap-5">
-              <h4 className="text-xs font-bold uppercase tracking-widest text-white/40">
+        <div className="grid grid-cols-2 gap-10 sm:grid-cols-3">
+          {FOOTER_DATA.map((col, idx) => (
+            <motion.div 
+              key={col.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: idx * 0.1 + 0.3 }}
+              className="flex flex-col gap-5"
+            >
+              <h4 className="text-xs font-bold uppercase tracking-widest text-amber-500/80">
                 {col.title}
               </h4>
               <ul className="flex flex-col gap-3">
@@ -54,59 +81,51 @@ const BrutalistFooter: React.FC = () => {
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="text-sm text-neutral-500 hover:text-white"
-                      style={{
-                        transition: 'none',        // zero-duration, brutal
-                        textDecoration: 'none',
-                      }}
+                      className="text-sm font-medium text-neutral-400 hover:text-white transition-colors duration-200"
                     >
                       {link.label}
                     </a>
                   </li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
 
-      {/* ─────────── Hero Typographic Centerpiece ─────────── */}
-      <div className="mx-auto w-full max-w-7xl px-6 md:px-12">
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1, delay: 0.5 }}
+        className="mx-auto w-full max-w-7xl px-6 md:px-12"
+      >
         <a
           href="#"
           className="group block w-full text-center leading-none"
           aria-label="VeilPay"
         >
           <span
-            className="inline-block font-bold tracking-tighter text-transparent transition-all duration-300 ease-out group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-cyan-300 group-hover:bg-clip-text group-hover:text-transparent"
+            className="inline-block font-black tracking-tighter text-transparent transition-all duration-500 ease-out group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-amber-400 group-hover:bg-clip-text group-hover:text-transparent"
             style={{
               fontSize: 'clamp(4rem, 16vw, 14rem)',
-              WebkitTextStroke: '1px white',
+              WebkitTextStroke: '2px rgba(255,255,255,0.1)',
             }}
           >
             VEILPAY
           </span>
         </a>
-      </div>
+      </motion.div>
 
-      {/* ─────────── Terminal legal bar ─────────── */}
       <div className="mx-auto mt-16 flex max-w-7xl flex-col items-center justify-between gap-4 border-t border-white/10 px-6 py-8 sm:flex-row md:px-12">
         <span className="text-xs text-neutral-500">
-          &copy; 2026 VeilPay.
+          &copy; 2026 VeilPay. All rights reserved.
         </span>
         <div className="flex items-center gap-6">
-          <a
-            href="#"
-            className="text-xs text-neutral-500 hover:text-white"
-            style={{ transition: 'none', textDecoration: 'none' }}
-          >
+          <a href="#" className="text-xs font-medium text-neutral-500 hover:text-amber-400 transition-colors">
             Terms of Service
           </a>
-          <a
-            href="#"
-            className="text-xs text-neutral-500 hover:text-white"
-            style={{ transition: 'none', textDecoration: 'none' }}
-          >
+          <a href="#" className="text-xs font-medium text-neutral-500 hover:text-amber-400 transition-colors">
             Privacy Policy
           </a>
         </div>
