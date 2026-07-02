@@ -19,6 +19,7 @@ html, body, #root {
   background: #000000;
   color: #ffffff;
   overflow-x: hidden;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 }
 
 /* V Loader */
@@ -54,4 +55,28 @@ html, body, #root {
     background: #111111;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
   }
+}
+
+@keyframes dust {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: var(--tw-opacity, 0.4);
+  }
+  50% {
+    transform: translateY(-50px) scale(1.5);
+  }
+  90% {
+    opacity: var(--tw-opacity, 0.4);
+  }
+  100% {
+    transform: translateY(-100px) scale(1);
+    opacity: 0;
+  }
+}
+
+.animate-dust {
+  animation: dust linear infinite;
 }

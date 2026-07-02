@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import * as THREE from 'three';
 import { Canvas } from '@react-three/fiber';
 import { Environment, PerspectiveCamera, Float } from '@react-three/drei';
 import Coin3D from './Coin3D';
@@ -55,13 +56,42 @@ const CoinsScene: React.FC<CoinsSceneProps> = ({ className = '' }) => {
     <div className={`absolute inset-0 z-10 pointer-events-none ${className}`}>
       <Canvas>
         <PerspectiveCamera makeDefault position={[0, 0, 15]} fov={45} />
-        <ambientLight intensity={1.5} />
-        <directionalLight position={[10, 10, 5]} intensity={2} />
-        <directionalLight position={[-10, -10, -5]} intensity={1} color="#4a4a4a" />
+        <directionalLight position={[10, 10, 10]} intensity={3} color="#ffffff" />
+        <directionalLight position={[-10, -10, -10]} intensity={1.5} color="#fbbf24" />
+        <ambientLight intensity={1.2} />
         
         <React.Suspense fallback={null}>
-          {/* Studio environment gives that high-end "real shine" reflection */}
-          <Environment preset="studio" />
+          {/* High-contrast Studio Environment for realistic silver reflections */}
+          <Environment resolution={512}>
+            {/* The Environment scene is basically a photo studio */}
+            <group>
+              {/* Massive Overhead Softbox (Bright White) */}
+              <mesh position={[0, 20, 0]} rotation={[Math.PI / 2, 0, 0]}>
+                <planeGeometry args={[100, 100]} />
+                <meshBasicMaterial color="#ffffff" side={THREE.DoubleSide} />
+              </mesh>
+              {/* Left Rim Light / Bounce (Slightly cooler white) */}
+              <mesh position={[-20, 0, 0]} rotation={[0, Math.PI / 2, 0]}>
+                <planeGeometry args={[40, 100]} />
+                <meshBasicMaterial color="#e2e8f0" side={THREE.DoubleSide} />
+              </mesh>
+              {/* Right Rim Light / Bounce (Warm Amber touch) */}
+              <mesh position={[20, 0, 0]} rotation={[0, -Math.PI / 2, 0]}>
+                <planeGeometry args={[40, 100]} />
+                <meshBasicMaterial color="#fef3c7" side={THREE.DoubleSide} />
+              </mesh>
+              {/* Front Fill (Darker to create contrast against the bright rims) */}
+              <mesh position={[0, 0, 20]} rotation={[0, Math.PI, 0]}>
+                <planeGeometry args={[100, 100]} />
+                <meshBasicMaterial color="#333333" side={THREE.DoubleSide} />
+              </mesh>
+              {/* Dark Floor to ground the reflections */}
+              <mesh position={[0, -20, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+                <planeGeometry args={[100, 100]} />
+                <meshBasicMaterial color="#000000" side={THREE.DoubleSide} />
+              </mesh>
+            </group>
+          </Environment>
 
           {coins.map((c) => (
             <Float 

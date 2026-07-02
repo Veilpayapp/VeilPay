@@ -17,34 +17,28 @@ const Coin3D: React.FC<Coin3DProps> = ({
   rotation = [0, 0, 0],
   scale = 1,
   wobbleSpeed = 0.5,
-  rotationSpeed = 0.005, // Slower rotation
+  rotationSpeed = 0.005,
 }) => {
   const meshRef = useRef<THREE.Mesh>(null);
   const logoDataUri = useMemo(() => getNextCryptoLogo(), []);
   
-  // Load the SVG data URI as a texture
   const texture = useTexture(logoDataUri);
   texture.colorSpace = THREE.SRGBColorSpace;
   
   useFrame((state) => {
     if (!meshRef.current) return;
-    
-    // Extremely smooth, slow rotation
     meshRef.current.rotation.y += rotationSpeed; 
     meshRef.current.rotation.x += Math.sin(state.clock.elapsedTime * wobbleSpeed) * 0.002;
     meshRef.current.rotation.z += Math.cos(state.clock.elapsedTime * wobbleSpeed) * 0.002;
   });
 
-  // Base material for the entire silver coin (using physical for realism)
-  const coinMaterial = useMemo(() => new THREE.MeshPhysicalMaterial({
-    color: '#e2e8f0', // bright silver
-    metalness: 1.0,
-    roughness: 0.15,
-    clearcoat: 0.4,
-    clearcoatRoughness: 0.1,
+  // Ultra-shiny silver material
+  const coinMaterial = useMemo(() => new THREE.MeshStandardMaterial({
+    color: '#f1f5f9', // bright silver base
+    metalness: 1.0,   // fully metallic
+    roughness: 0.1,  // very smooth and shiny
   }), []);
 
-  // Material for the decal (logo)
   const decalMaterial = useMemo(() => new THREE.MeshStandardMaterial({
     color: '#ffffff',
     metalness: 0.5,
@@ -56,20 +50,20 @@ const Coin3D: React.FC<Coin3DProps> = ({
     polygonOffsetFactor: -1,
   }), [texture]);
 
-  // Profile of a real coin with a raised rim
+  // Profile of a real coin with a raised rim, reversed to ensure normals point outward correctly
   const coinProfile = useMemo(() => {
     return [
       new THREE.Vector2(0, 0.06),
       new THREE.Vector2(0.85, 0.06), // inner flat center
       new THREE.Vector2(0.88, 0.09), // bevel up to rim
       new THREE.Vector2(0.96, 0.09), // top flat of rim
-      new THREE.Vector2(1.0, 0.05), // outer top rounded edge
+      new THREE.Vector2(1.0, 0.05),  // outer top rounded edge
       new THREE.Vector2(1.0, -0.05), // outer bottom rounded edge
-      new THREE.Vector2(0.96, -0.09), // bottom flat of rim
-      new THREE.Vector2(0.88, -0.09), // bevel down
-      new THREE.Vector2(0.85, -0.06), // inner flat bottom
+      new THREE.Vector2(0.96, -0.09),// bottom flat of rim
+      new THREE.Vector2(0.88, -0.09),// bevel down
+      new THREE.Vector2(0.85, -0.06),// inner flat bottom
       new THREE.Vector2(0, -0.06),
-    ];
+    ].reverse(); // Reverse to fix winding order/normals
   }, []);
 
   return (
@@ -80,8 +74,10 @@ const Coin3D: React.FC<Coin3DProps> = ({
       scale={scale}
       material={coinMaterial}
     >
-      <latheGeometry args={[coinProfile, 64]} />
-      {/* Front Cap Logo */}
+      {/* 3D Coin geometry with raised rim */}
+      <latheGeometry args={[coinProfile, 128]} />
+      
+      {/* Front Face Logo */}
       <Decal
         position={[0, 0.061, 0]}
         rotation={[-Math.PI / 2, 0, 0]}
@@ -89,7 +85,7 @@ const Coin3D: React.FC<Coin3DProps> = ({
         map={texture}
         material={decalMaterial}
       />
-      {/* Back Cap Logo */}
+      {/* Back Face Logo */}
       <Decal
         position={[0, -0.061, 0]}
         rotation={[Math.PI / 2, 0, Math.PI]}

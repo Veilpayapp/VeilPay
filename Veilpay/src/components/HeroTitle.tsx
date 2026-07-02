@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import PixelDecodeText from './PixelDecodeText';
+import { PixelSweepText } from './PixelSweepText';
 
 const HeroTitle: React.FC = () => {
   return (
@@ -11,19 +11,28 @@ const HeroTitle: React.FC = () => {
         transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
         className="mb-8"
       >
-        <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-gray-400 md:text-sm">
-          Next Generation Crypto Network
-        </p>
+        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-md">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+          </span>
+          <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-gray-300 md:text-xs">
+            Next Generation Crypto Network
+          </p>
+        </div>
         <h1 
-          className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white drop-shadow-2xl leading-tight"
-          style={{ textShadow: '0 10px 30px rgba(0,0,0,0.8)' }}
+          className="text-6xl md:text-8xl lg:text-[7rem] font-extrabold tracking-tighter leading-[1.05]"
         >
-          Send <br className="hidden md:block" />
-          <PixelDecodeText 
-            words={["MILLION DOLLAR", "BORDERLESS", "INSTANT", "SECURE", "ANONYMOUS"]} 
-            className="bg-gradient-to-r from-yellow-400 via-amber-300 to-amber-600 bg-clip-text text-transparent filter drop-shadow-[0_0_15px_rgba(251,191,36,0.6)]"
-          /> <br className="hidden md:block" />
-          Payments.
+          <span 
+            className="text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60 inline-block"
+            style={{ filter: 'drop-shadow(0 -30px 60px rgba(255,255,255,0.8))' }}
+          >
+            One App.
+          </span> <br className="hidden md:block" />
+          <PixelSweepText 
+            words={["NO BORDERS", "NO BANKS"]} 
+            className="bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(251,191,36,0.3)] inline-block"
+          />
         </h1>
       </motion.div>
     </div>

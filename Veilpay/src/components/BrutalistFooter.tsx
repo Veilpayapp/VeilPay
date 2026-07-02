@@ -106,10 +106,10 @@ const BrutalistFooter: React.FC = () => {
           aria-label="VeilPay"
         >
           <span
-            className="inline-block font-black tracking-tighter text-transparent transition-all duration-500 ease-out group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-amber-400 group-hover:bg-clip-text group-hover:text-transparent"
+            className="inline-block font-black tracking-tighter text-transparent transition-all duration-700 ease-in-out group-hover:bg-gradient-to-r group-hover:from-amber-300 group-hover:via-amber-500 group-hover:to-amber-700 group-hover:bg-clip-text group-hover:text-transparent group-hover:drop-shadow-[0_0_30px_rgba(251,191,36,0.3)]"
             style={{
               fontSize: 'clamp(4rem, 16vw, 14rem)',
-              WebkitTextStroke: '2px rgba(255,255,255,0.1)',
+              WebkitTextStroke: '1px rgba(255,255,255,0.2)',
             }}
           >
             VEILPAY
