@@ -3,43 +3,59 @@ import { motion } from 'framer-motion';
 export default function GlassNavbar() {
   return (
     <>
-      <svg className="pointer-events-none absolute hidden">
-        <filter id="refraction" x="-20%" y="-20%" width="140%" height="140%">
-          <feTurbulence type="fractalNoise" baseFrequency="0.005" numOctaves="2" result="noise" />
-          <feDisplacementMap in="SourceGraphic" in2="noise" scale="10" xChannelSelector="R" yChannelSelector="G" />
-        </filter>
-      </svg>
       <motion.nav
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2, ease: 'easeOut' }}
-        className="fixed top-6 left-1/2 z-50 flex h-14 -translate-x-1/2 items-center gap-6 rounded-full border border-white/5 bg-white/5 px-6 shadow-[inset_0_2px_3px_rgba(255,255,255,0.6),inset_0_-2px_3px_rgba(0,0,0,0.3),inset_0_8px_20px_rgba(255,255,255,0.25),inset_0_-8px_20px_rgba(0,0,0,0.15),0_20px_40px_rgba(0,0,0,0.4)] transition-all duration-500 hover:bg-white/10 hover:shadow-[inset_0_2px_3px_rgba(255,255,255,0.7),inset_0_-2px_3px_rgba(0,0,0,0.4),inset_0_8px_20px_rgba(255,255,255,0.3),inset_0_-8px_20px_rgba(0,0,0,0.2),0_24px_48px_rgba(0,0,0,0.5)] md:h-14 md:px-8"
-        style={{ backdropFilter: 'blur(8px) url(#refraction)' }}
+        className="fixed top-6 left-0 right-0 mx-auto z-50 flex items-center justify-between px-8"
+        style={{
+          width: 'max-content',
+          minWidth: '550px',
+          height: '56px',
+          borderRadius: '40px',
+          background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.01) 100%)',
+          /* Clean frosted glass without distortion or noise */
+          backdropFilter: 'saturate(180%) blur(16px)',
+          WebkitBackdropFilter: 'saturate(180%) blur(16px)',
+          boxShadow: `
+            inset 0 1px 1px rgba(255, 255, 255, 0.4),
+            inset 0 -1px 2px rgba(0, 0, 0, 0.6),
+            inset -1px 0 2px rgba(255, 255, 255, 0.1),
+            0 15px 30px rgba(0, 0, 0, 0.4)
+          `,
+          border: '1px solid rgba(255, 255, 255, 0.08)',
+        }}
       >
-      <a href="#" className="text-sm font-semibold tracking-tight text-white">
-        Veilpay
-      </a>
-      <div className="hidden items-center gap-4 md:flex">
-        <a
-          href="#features"
-          className="text-sm text-gray-300 transition-colors hover:text-white"
-        >
-          Features
-        </a>
-        <a
-          href="#about"
-          className="text-sm text-gray-300 transition-colors hover:text-white"
-        >
-          About
-        </a>
-        <a
-          href="#contact"
-          className="text-sm text-gray-300 transition-colors hover:text-white"
-        >
-          Contact
-        </a>
-      </div>
-    </motion.nav>
+
+        {/* Left Links */}
+        <div className="flex items-center gap-6 relative z-10">
+          <a href="#home" className="text-[13px] font-semibold text-white/70 hover:text-white transition-colors tracking-wide uppercase">Home</a>
+          <a href="#features" className="text-[13px] font-semibold text-white/70 hover:text-white transition-colors tracking-wide uppercase">Features</a>
+        </div>
+
+        {/* Center Logo */}
+        <div className="flex items-center justify-center relative z-10 mx-10">
+          <div 
+            style={{
+              width: '40px',
+              height: '40px',
+              background: 'url(/image.png)',
+              backgroundColor: '#ffffff',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              borderRadius: '50%',
+              boxShadow: '0 0 20px rgba(255,255,255,0.1)'
+            }}
+          />
+        </div>
+
+        {/* Right Links */}
+        <div className="flex items-center gap-6 relative z-10">
+          <a href="#developers" className="text-[13px] font-semibold text-white/70 hover:text-white transition-colors tracking-wide uppercase">Devs</a>
+          <a href="#contact" className="text-[13px] font-semibold text-white/70 hover:text-white transition-colors tracking-wide uppercase">Contact</a>
+        </div>
+      </motion.nav>
     </>
   );
 }

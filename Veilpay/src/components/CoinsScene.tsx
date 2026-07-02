@@ -1,7 +1,7 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import * as THREE from 'three';
 import { Canvas } from '@react-three/fiber';
-import { Environment, PerspectiveCamera, Float } from '@react-three/drei';
+import { Environment, PerspectiveCamera } from '@react-three/drei';
 import Coin3D from './Coin3D';
 
 interface CoinsSceneProps {
@@ -9,106 +9,52 @@ interface CoinsSceneProps {
 }
 
 const CoinsScene: React.FC<CoinsSceneProps> = ({ className = '' }) => {
-  // Generate a symmetric, scattered layout of coins
-  const coins = useMemo(() => {
-    const totalCoins = 24;
-    const half = totalCoins / 2;
-    
-    return Array.from({ length: totalCoins }).map((_, i) => {
-      const isLeft = i < half;
-      
-      // Left side: -15 to -3. Right side: 3 to 15.
-      const xBase = 3 + Math.random() * 12;
-      const x = isLeft ? -xBase : xBase;
-      
-      // y from -15 to 15
-      const y = (Math.random() - 0.5) * 30;
-      // z from -10 to 2
-      const z = (Math.random() - 0.5) * 12 - 4;
-      
-      const rx = Math.random() * Math.PI * 2;
-      const ry = Math.random() * Math.PI * 2;
-      const rz = Math.random() * Math.PI * 2;
-      
-      const scale = 0.8 + Math.random() * 1.5; // 0.8 to 2.3
-      const floatSpeed = 0.5 + Math.random() * 1.5; 
-      const floatIntensity = 0.5 + Math.random() * 2;
-      const rotationIntensity = 0.1 + Math.random() * 0.5;
-      
-      const wobbleSpeed = 0.1 + Math.random() * 0.4;
-      const rotationSpeed = 0.002 + Math.random() * 0.005; // Even slower rotation
-
-      return {
-        key: i,
-        position: [x, y, z] as [number, number, number],
-        rotation: [rx, ry, rz] as [number, number, number],
-        scale,
-        floatSpeed,
-        floatIntensity,
-        rotationIntensity,
-        wobbleSpeed,
-        rotationSpeed
-      };
-    });
-  }, []);
-
   return (
     <div className={`absolute inset-0 z-10 pointer-events-none ${className}`}>
-      <Canvas>
+      <Canvas dpr={[1, 1.5]} performance={{ min: 0.5 }}>
         <PerspectiveCamera makeDefault position={[0, 0, 15]} fov={45} />
-        <directionalLight position={[10, 10, 10]} intensity={3} color="#ffffff" />
-        <directionalLight position={[-10, -10, -10]} intensity={1.5} color="#fbbf24" />
-        <ambientLight intensity={1.2} />
+        {/* Adjusted studio lighting for charcoal background and amber arc */}
+        <directionalLight position={[10, 10, 10]} intensity={2.5} color="#ffffff" />
+        <directionalLight position={[-10, -10, -10]} intensity={1.5} color="#e2e8f0" />
+        <ambientLight intensity={0.8} />
         
         <React.Suspense fallback={null}>
           {/* High-contrast Studio Environment for realistic silver reflections */}
-          <Environment resolution={512}>
-            {/* The Environment scene is basically a photo studio */}
-            <group>
-              {/* Massive Overhead Softbox (Bright White) */}
-              <mesh position={[0, 20, 0]} rotation={[Math.PI / 2, 0, 0]}>
-                <planeGeometry args={[100, 100]} />
+          <Environment resolution={256}>
+            <group rotation={[-Math.PI / 4, 0, 0]}>
+              <mesh position={[0, 10, -5]}>
+                <planeGeometry args={[20, 20]} />
                 <meshBasicMaterial color="#ffffff" side={THREE.DoubleSide} />
               </mesh>
-              {/* Left Rim Light / Bounce (Slightly cooler white) */}
-              <mesh position={[-20, 0, 0]} rotation={[0, Math.PI / 2, 0]}>
-                <planeGeometry args={[40, 100]} />
-                <meshBasicMaterial color="#e2e8f0" side={THREE.DoubleSide} />
+              <mesh position={[-5, -10, 10]} rotation={[Math.PI / 2, 0, 0]}>
+                <planeGeometry args={[30, 30]} />
+                <meshBasicMaterial color="#cbd5e1" side={THREE.DoubleSide} />
               </mesh>
-              {/* Right Rim Light / Bounce (Warm Amber touch) */}
               <mesh position={[20, 0, 0]} rotation={[0, -Math.PI / 2, 0]}>
                 <planeGeometry args={[40, 100]} />
-                <meshBasicMaterial color="#fef3c7" side={THREE.DoubleSide} />
+                <meshBasicMaterial color="#f8fafc" side={THREE.DoubleSide} />
               </mesh>
-              {/* Front Fill (Darker to create contrast against the bright rims) */}
-              <mesh position={[0, 0, 20]} rotation={[0, Math.PI, 0]}>
-                <planeGeometry args={[100, 100]} />
-                <meshBasicMaterial color="#333333" side={THREE.DoubleSide} />
-              </mesh>
-              {/* Dark Floor to ground the reflections */}
-              <mesh position={[0, -20, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-                <planeGeometry args={[100, 100]} />
-                <meshBasicMaterial color="#000000" side={THREE.DoubleSide} />
+              <mesh position={[0, 0, -20]}>
+                <ringGeometry args={[10, 15, 64]} />
+                <meshBasicMaterial color="#ffffff" side={THREE.DoubleSide} />
               </mesh>
             </group>
           </Environment>
 
-          {coins.map((c) => (
-            <Float 
-              key={c.key} 
-              speed={c.floatSpeed} 
-              rotationIntensity={c.rotationIntensity} 
-              floatIntensity={c.floatIntensity}
-            >
-              <Coin3D 
-                position={c.position} 
-                rotation={c.rotation} 
-                scale={c.scale} 
-                wobbleSpeed={c.wobbleSpeed}
-                rotationSpeed={c.rotationSpeed}
-              />
-            </Float>
-          ))}
+          <group position={[0, 1.3, 0]} scale={1.05}> {/* Shifted slightly down and scaled up 5% */}
+            {/* Left Coin */}
+            <Coin3D position={[-6.2, 1, 0]} rotation={[0.5, 0.4, 0]} />
+            {/* Right Coin */}
+            <Coin3D position={[6.2, 1.5, 0]} rotation={[-0.2, -0.5, 0.2]} />
+            {/* Top Right Coin */}
+            <Coin3D position={[4.2, 4, -2]} rotation={[0.8, -0.2, 0.5]} scale={0.7} />
+            {/* Bottom Left Coin */}
+            <Coin3D position={[-5.2, -4, -1]} rotation={[-0.4, 0.6, -0.3]} scale={0.8} />
+            {/* Top Left Coin */}
+            <Coin3D position={[-4.5, 3.5, -2]} rotation={[-0.5, 0.2, 0.6]} scale={0.65} />
+            {/* Bottom Right Coin */}
+            <Coin3D position={[5.5, -3.5, -1.5]} rotation={[0.3, -0.4, -0.5]} scale={0.75} />
+          </group>
         </React.Suspense>
       </Canvas>
     </div>

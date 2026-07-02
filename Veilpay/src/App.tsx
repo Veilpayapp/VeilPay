@@ -7,7 +7,6 @@ import ChatPaySection from './components/ChatPaySection';
 import BrutalistFooter from './components/BrutalistFooter';
 import SmoothScroll from './components/SmoothScroll';
 import NoiseOverlay from './components/NoiseOverlay';
-import CustomCursor from './components/CustomCursor';
 import './App.css';
 
 function App() {
@@ -18,8 +17,8 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white cursor-none">
-      <CustomCursor />
+    <div className="min-h-screen bg-black text-white">
+      <GlassNavbar />
       <NoiseOverlay />
       <AnimatePresence mode="wait">
         {isLoading ? (

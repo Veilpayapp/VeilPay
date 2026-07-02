@@ -1,42 +1,35 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { PixelSweepText } from './PixelSweepText';
 
 const HeroTitle: React.FC = () => {
   return (
-    <div className="absolute inset-0 z-30 flex flex-col items-center justify-center text-center px-4 pointer-events-none">
+    <div className="relative flex flex-col items-center justify-center text-center max-w-4xl px-4 mt-[-10vh]">
       <motion.div
-        initial={{ opacity: 0, scale: 0.9, y: -50 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
-        className="mb-8"
+        className="mb-8 w-full flex flex-col items-center"
       >
-        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-md">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
-          </span>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-gray-300 md:text-xs">
-            Next Generation Crypto Network
-          </p>
-        </div>
-        <h1 
-          className="text-6xl md:text-8xl lg:text-[7rem] font-extrabold tracking-tighter leading-[1.05]"
+        <div 
+          className="flex flex-col items-center text-center text-6xl md:text-[6.5rem] leading-normal tracking-tighter mb-4"
+          style={{ fontFamily: "'Playfair Display', serif" }}
         >
-          <span 
-            className="text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60 inline-block"
-            style={{ filter: 'drop-shadow(0 -30px 60px rgba(255,255,255,0.8))' }}
-          >
-            One App.
-          </span> <br className="hidden md:block" />
-          <PixelSweepText 
-            words={["NO BORDERS", "NO BANKS"]} 
-            className="bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(251,191,36,0.3)] inline-block"
-          />
-        </h1>
+          <span className="text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-300 to-[#111111] drop-shadow-[0_20px_30px_rgba(255,255,255,0.05)] drop-shadow-[0_5px_10px_rgba(0,0,0,1)] pb-4">
+            Send & receive
+          </span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#F2C572] via-[#D4A042] to-[#1a1103] drop-shadow-[0_20px_30px_rgba(212,160,66,0.1)] drop-shadow-[0_5px_10px_rgba(0,0,0,1)] -mt-6 md:-mt-10 pb-4">
+            crypto
+          </span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-400 to-[#111111] italic font-light tracking-normal text-5xl md:text-[5rem] my-1 drop-shadow-[0_20px_30px_rgba(255,255,255,0.05)] drop-shadow-[0_5px_10px_rgba(0,0,0,1)] -mt-4 md:-mt-6 pb-4">
+            like a
+          </span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#F9D423] via-[#D4A042] to-[#1a1103] drop-shadow-[0_20px_30px_rgba(212,160,66,0.1)] drop-shadow-[0_5px_10px_rgba(0,0,0,1)] -mt-6 md:-mt-8 pb-4">
+            text message.
+          </span>
+        </div>
       </motion.div>
     </div>
   );
 };
 
-export default HeroTitle;
+export default React.memo(HeroTitle);

@@ -4,10 +4,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import MeshGrid from './MeshGrid';
 import IPhoneMockup from './IPhoneMockup';
 import CoinsScene from './CoinsScene';
-import VolumetricGlow from './VolumetricGlow';
+import LightArc from './LightArc';
 import FeatureCards from './FeatureCards';
 import HeroTitle from './HeroTitle';
-import AmbientDust from './AmbientDust';
+import IntroTitle from './IntroTitle';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,10 +19,11 @@ const ScrollSequence: React.FC = () => {
   const meshGridRef = useRef<HTMLDivElement>(null);
   const phoneRef = useRef<HTMLDivElement>(null);
   const coinsContainerRef = useRef<HTMLDivElement>(null);
-  const coinsInnerRef = useRef<HTMLDivElement>(null);
+  // Coins are NOT scaled by GSAP, only translated
   const glowRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
+  const introTitleRef = useRef<HTMLDivElement>(null);
   const titleBRef = useRef<HTMLDivElement>(null);
 
   // Track refs to avoid re-runs without cleanup
@@ -36,127 +37,80 @@ const ScrollSequence: React.FC = () => {
     const coins = coinsContainerRef.current;
     const glow = glowRef.current;
     const cards = cardsRef.current;
-    const coinsInner = coinsInnerRef.current;
     const title = titleRef.current;
+    const introTitle = introTitleRef.current;
     const titleB = titleBRef.current;
 
-    if (!container || !bg || !mesh || !phone || !coins || !glow || !cards || !coinsInner || !title || !titleB) return;
+    const screenLogo = phone?.querySelector('.screen-logo');
 
-    // ── Initial states before GSAP takes over ──
-    gsap.set(bg, { opacity: 1 });
-    gsap.set(mesh, { opacity: 0 });
-    gsap.set(phone, { y: '100vh', opacity: 0 });
-    gsap.set(coins, { opacity: 1, y: 0 });
-    gsap.set(glow, { opacity: 0 });
-    gsap.set(title, { opacity: 1, y: 0 });
-    gsap.set(titleB, { opacity: 0, y: 0 });
+    if (!container || !bg || !mesh || !phone || !coins || !glow || !cards || !title || !introTitle || !titleB) return;
+    let ctx = gsap.context(() => {
+      // ── Initial states before GSAP takes over ──
+      gsap.set(bg, { opacity: 1 });
+      gsap.set(mesh, { opacity: 0 });
+      gsap.set(phone, { y: '95vh', opacity: 1, scale: 1, transformOrigin: 'center center' });
+      gsap.set(coins, { opacity: 1, y: 0 });
+      // coins scale is not touched by GSAP
+      gsap.set(title, { opacity: 1, y: 0 });
+      gsap.set(introTitle, { opacity: 0, y: 0 });
+      gsap.set(titleB, { opacity: 0, y: 0 });
 
-    // ── Create a master timeline driven by scroll ──
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: container,
-        start: 'top top',
-        end: '+=3000',
-        pin: true,
-        scrub: 0.5,
-      },
-    });
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: container,
+          start: 'top top',
+          end: '+=12000', // Dramatically increased to make the story pass slowly
+          scrub: 1.5,
+          pin: true,
+          anticipatePin: 1,
+        },
+      });
+      stRef.current = tl.scrollTrigger as ScrollTrigger;
 
-    stRef.current = tl.scrollTrigger as ScrollTrigger;
+      // STAGE 1: Phone rises and shrinks, Text levitates instantly, Coins levitate slightly later
+      tl.to(mesh, { opacity: 0.6, duration: 0.4, ease: 'power1.inOut' }, 0);
+      tl.to(phone, { y: '20vh', scale: 0.78, opacity: 1, duration: 0.4, ease: 'power2.out' }, 0);
+      tl.to(title, { y: '-100vh', opacity: 0, duration: 0.4, ease: 'power2.out' }, 0);
+      tl.fromTo(coins, { y: '0vh', opacity: 1 }, { y: '-100vh', opacity: 0, duration: 0.4, ease: 'power2.out' }, 0.3);
 
-    // ═════════════════════════════════════════════
-    // STAGE 1: Hero Entrance (0% - 30%)
-    // ═════════════════════════════════════════════
-    // Background crossfade: pure black → mesh grid
-    tl.to(
-      bg,
-      { opacity: 0, duration: 0.3, ease: 'power2.inOut' },
-      0,
-    );
-    tl.to(
-      mesh,
-      { opacity: 1, duration: 0.3, ease: 'power2.inOut' },
-      0,
-    );
-
-    // Phone rises from off-screen bottom to center
-    tl.to(
-      phone,
-      { y: 0, opacity: 1, duration: 0.3, ease: 'expo.out' },
-      0,
-    );
-
-    // Coins scale-up and outward radial expansion for kinetic depth
-    tl.to(
-      coinsInner,
-      { scale: 1.2, duration: 0.3, ease: 'power2.out' },
-      0,
-    );
-
-    // ═════════════════════════════════════════════
-    // STAGE 2: Layout Split & Parallax (30% - 70%)
-    // ═════════════════════════════════════════════
-    // Title A (HeroTitle) fades out and moves up from 0.2 to 0.4
-    tl.to(
-      title,
-      { y: '-30vh', opacity: 0, duration: 0.2, ease: 'power2.inOut' },
-      0.2,
-    );
-
-    // Title B (State B) fades in and moves up slightly from 0.4 to 0.6
-    tl.fromTo(
-      titleB,
-      { y: '30vh', opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.2, ease: 'power2.out' },
-      0.4,
-    );
-
-    // Heavy upward parallax on coins → drive out of viewport
-    tl.to(
-      coins,
-      { y: '-120vh', opacity: 0, duration: 0.4, ease: 'power4.in' },
-      0.3,
-    );
-
-    // Phone translates to fixed right-third position (0.2 to 0.6)
-    const phoneShift = window.innerWidth > 768 ? '25vw' : '10vw';
-    tl.to(
-      phone,
-      { x: phoneShift, duration: 0.4, ease: 'power2.inOut' },
-      0.2,
-    );
-
-    // ═════════════════════════════════════════════
-    // STAGE 3: Atmospheric Lighting & Content (70% - 100%)
-    // ═════════════════════════════════════════════
-    // Fade in volumetric glow behind the phone
-    tl.to(
-      glow,
-      { opacity: 1, duration: 0.15, ease: 'power2.out' },
-      0.7,
-    );
-
-    // Fade in glassmorphism feature cards on the left with staggered fanned entrance
-    tl.fromTo(
-      cards.children,
-      { opacity: 0, y: 40, rotation: 0 },
-      { 
-        opacity: 1, 
-        y: (i) => (i === 1 ? 0 : 12), 
-        rotation: (i) => (i === 0 ? -6 : i === 1 ? 0 : 6), 
-        duration: 0.2, 
-        stagger: 0.05, 
-        ease: 'power2.out' 
-      },
-      0.7,
-    );
-
-    return () => {
-      if (stRef.current) {
-        stRef.current.kill();
+      // STAGE 2 (0.8s): Intro Reveal (Phone stays in center)
+      tl.fromTo(introTitle, { y: '20vh', opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' }, 0.8);
+      if (screenLogo) {
+        tl.fromTo(screenLogo, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: 'power2.out' }, 0.8);
       }
-      tl.kill();
-    };
+
+      // STAGE 3 (1.4s): The Blank Pause (Intro fades out)
+      tl.to(introTitle, { opacity: 0, duration: 0.4, ease: 'power2.inOut' }, 1.4);
+      if (screenLogo) {
+        tl.to(screenLogo, { opacity: 0, duration: 0.4, ease: 'power2.inOut' }, 1.4);
+      }
+
+      // STAGE 4 (2.0s): Phone shifts right, "One Wallet" comes in
+      const phoneShift = window.innerWidth > 768 ? '25vw' : '10vw';
+      tl.to(phone, { x: phoneShift, duration: 0.4, ease: 'power2.inOut' }, 2.0);
+      tl.fromTo(titleB, { y: '30vh', opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' }, 2.0);
+
+      // STAGE 5 (2.8s): "One Wallet" fades out upwards
+      tl.to(titleB, { y: '-30vh', opacity: 0, duration: 0.4, ease: 'power2.inOut' }, 2.8);
+
+      // STAGE 6 (3.2s): Feature Cards fan out
+      tl.to(glow, { opacity: 1, duration: 0.15, ease: 'power2.out' }, 3.2);
+      tl.fromTo(
+        cards.children,
+        { opacity: 0, y: 80, rotation: 0 },
+        { 
+          opacity: 1, 
+          y: (i) => (i === 1 ? -10 : 20), 
+          rotation: (i) => (i === 0 ? -8 : i === 1 ? 0 : 8), 
+          duration: 0.5, 
+          stagger: 0.1, 
+          ease: 'power3.out' 
+        },
+        3.2,
+      );
+    }, container);
+
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -168,39 +122,52 @@ const ScrollSequence: React.FC = () => {
       {/* Stage 0: Pure OLED Black Background Layer */}
       <div
         ref={bgOverlayRef}
-        className="absolute inset-0 z-0 bg-black"
-        style={{ opacity: 1 }}
+        className="absolute inset-0 z-0 bg-black opacity-100"
       />
 
-      {/* Stage 1: Mesh Square Grid (fades in over black) */}
+      {/* Amber to Black Gradient Overlay (decreased opacity, fades out by mid-screen) */}
+      <div className="absolute top-0 inset-x-0 h-[50vh] z-0 bg-gradient-to-b from-[#D4A042]/8 to-transparent pointer-events-none" />
+
+      {/* Grid Layer (fades out as phone scales up) */}
       <div ref={meshGridRef} className="absolute inset-0 z-0 opacity-0">
         <MeshGrid />
       </div>
 
-      {/* Ambient Floating Dust */}
-      <AmbientDust />
+      {/* Volumetric Light Arc (Replaces the circular glow) */}
+      <div ref={glowRef} className="absolute inset-0 z-0">
+        <LightArc />
+      </div>
 
-      {/* 3D Coins Layer — animated by GSAP */}
-      <div
-        ref={coinsContainerRef}
-        className="absolute inset-0 z-10 pointer-events-none"
-      >
-        <div ref={coinsInnerRef} className="relative h-full w-full">
+      {/* 3D Coins Layer — translated by GSAP but NOT scaled */}
+      <div ref={coinsContainerRef} className="absolute inset-0 z-40 pointer-events-none">
+        <div className="relative h-full w-full">
           <CoinsScene />
         </div>
       </div>
 
-      {/* iPhone Mockup Layer (centered, then moves right) */}
-      <div ref={phoneRef} className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none mt-[25vh] md:mt-[30vh]">
+      {/* Feature Cards Layer (left-aligned) */}
+      <div className="absolute inset-0 z-30 pointer-events-none flex items-center justify-start md:pl-24">
+        <div ref={cardsRef} className="flex gap-4 items-center">
+          <FeatureCards />
+        </div>
+      </div>
+
+      {/* iPhone Mockup Layer (anchored to bottom fold, then moves right) */}
+      <div ref={phoneRef} className="absolute inset-x-0 bottom-0 z-20 flex items-end justify-center pointer-events-none translate-y-[20%]">
         <IPhoneMockup />
       </div>
 
       {/* Hero Title Layer A (center) */}
-      <div ref={titleRef} className="absolute inset-0 z-30 pointer-events-none flex items-center justify-center -mt-[15vh]">
+      <div ref={titleRef} className="absolute inset-0 z-30 pointer-events-none flex items-center justify-center">
         <HeroTitle />
       </div>
 
-      {/* Hero Title Layer B (left side, appears after phone moves right) */}
+      {/* Intro Title Layer (left & right side, sits behind phone) */}
+      <div ref={introTitleRef} className="absolute inset-0 z-10 pointer-events-none flex items-center justify-center w-full">
+        <IntroTitle />
+      </div>
+
+      {/* Feature Title Layer B (left side, appears after IntroTitle) */}
       <div ref={titleBRef} className="absolute inset-0 z-30 pointer-events-none flex flex-col justify-center px-8 md:px-16 lg:px-24">
         <div className="max-w-xl">
           <h2 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-[1.05] mb-6">
@@ -224,11 +191,7 @@ const ScrollSequence: React.FC = () => {
         </div>
       </div>
 
-      {/* Volumetric Glow Layer (behind phone, above coins) */}
-      <VolumetricGlow ref={glowRef} />
 
-      {/* Feature Cards Layer (left side) */}
-      <FeatureCards ref={cardsRef} />
     </div>
   );
 };
