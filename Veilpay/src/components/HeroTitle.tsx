@@ -14,16 +14,16 @@ const HeroTitle: React.FC = () => {
           className="flex flex-col items-center text-center text-6xl md:text-[6.5rem] leading-normal tracking-tighter mb-4"
           style={{ fontFamily: "'Playfair Display', serif" }}
         >
-          <span className="text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-300 to-[#111111] drop-shadow-[0_20px_30px_rgba(255,255,255,0.05)] drop-shadow-[0_5px_10px_rgba(0,0,0,1)] pb-4">
+          <span className="text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-300 to-[#111111] pb-4">
             Send & receive
           </span>
-          <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#F2C572] via-[#D4A042] to-[#1a1103] drop-shadow-[0_20px_30px_rgba(212,160,66,0.1)] drop-shadow-[0_5px_10px_rgba(0,0,0,1)] -mt-6 md:-mt-10 pb-4">
+          <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#F2C572] via-[#D4A042] to-[#1a1103] -mt-6 md:-mt-10 pb-4 preserve-color">
             crypto
           </span>
-          <span className="text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-400 to-[#111111] italic font-light tracking-normal text-5xl md:text-[5rem] my-1 drop-shadow-[0_20px_30px_rgba(255,255,255,0.05)] drop-shadow-[0_5px_10px_rgba(0,0,0,1)] -mt-4 md:-mt-6 pb-4">
+          <span className="text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-400 to-[#111111] italic font-light tracking-normal text-5xl md:text-[5rem] my-1 -mt-4 md:-mt-6 pb-4">
             like a
           </span>
-          <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#F9D423] via-[#D4A042] to-[#1a1103] drop-shadow-[0_20px_30px_rgba(212,160,66,0.1)] drop-shadow-[0_5px_10px_rgba(0,0,0,1)] -mt-6 md:-mt-8 pb-4">
+          <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#F9D423] via-[#D4A042] to-[#1a1103] -mt-6 md:-mt-8 pb-4 preserve-color">
             text message.
           </span>
         </div>

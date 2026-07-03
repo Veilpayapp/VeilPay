@@ -5,7 +5,7 @@ import MeshGrid from './MeshGrid';
 import IPhoneMockup from './IPhoneMockup';
 import CoinsScene from './CoinsScene';
 import LightArc from './LightArc';
-import FeatureCards from './FeatureCards';
+import BentoGrid from './BentoGrid';
 import HeroTitle from './HeroTitle';
 import IntroTitle from './IntroTitle';
 
@@ -69,7 +69,7 @@ const ScrollSequence: React.FC = () => {
 
       // STAGE 1: Phone rises and shrinks, Text levitates instantly, Coins levitate slightly later
       tl.to(mesh, { opacity: 0.6, duration: 0.4, ease: 'power1.inOut' }, 0);
-      tl.to(phone, { y: '20vh', scale: 0.78, opacity: 1, duration: 0.4, ease: 'power2.out' }, 0);
+      tl.to(phone, { y: '18vh', scale: 0.78, opacity: 1, duration: 0.4, ease: 'power2.out' }, 0);
       tl.to(title, { y: '-100vh', opacity: 0, duration: 0.4, ease: 'power2.out' }, 0);
       tl.fromTo(coins, { y: '0vh', opacity: 1 }, { y: '-100vh', opacity: 0, duration: 0.4, ease: 'power2.out' }, 0.3);
 
@@ -87,26 +87,26 @@ const ScrollSequence: React.FC = () => {
 
       // STAGE 4 (2.0s): Phone shifts right, "One Wallet" comes in
       const phoneShift = window.innerWidth > 768 ? '25vw' : '10vw';
-      tl.to(phone, { x: phoneShift, duration: 0.4, ease: 'power2.inOut' }, 2.0);
-      tl.fromTo(titleB, { y: '30vh', opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' }, 2.0);
+      tl.to(phone, { x: phoneShift, duration: 1.2, ease: 'power3.inOut' }, 2.0);
+      tl.fromTo(titleB, { y: '30vh', opacity: 0 }, { y: '4vh', opacity: 1, duration: 0.8, ease: 'power3.out' }, 2.2);
 
-      // STAGE 5 (2.8s): "One Wallet" fades out upwards
-      tl.to(titleB, { y: '-30vh', opacity: 0, duration: 0.4, ease: 'power2.inOut' }, 2.8);
+      // STAGE 5 (3.6s): "One Wallet" fades out upwards
+      tl.to(titleB, { y: '-30vh', opacity: 0, duration: 0.4, ease: 'power2.inOut' }, 3.6);
 
-      // STAGE 6 (3.2s): Feature Cards fan out
-      tl.to(glow, { opacity: 1, duration: 0.15, ease: 'power2.out' }, 3.2);
+      // STAGE 6 (4.0s): Bento Grid slides in staggered
+      tl.to(glow, { opacity: 1, duration: 0.15, ease: 'power2.out' }, 4.0);
+      const bentoCards = cards.querySelectorAll('.bento-card');
       tl.fromTo(
-        cards.children,
-        { opacity: 0, y: 80, rotation: 0 },
+        bentoCards,
+        { opacity: 0, y: 50 },
         { 
           opacity: 1, 
-          y: (i) => (i === 1 ? -10 : 20), 
-          rotation: (i) => (i === 0 ? -8 : i === 1 ? 0 : 8), 
-          duration: 0.5, 
-          stagger: 0.1, 
+          y: 0, 
+          duration: 0.8, 
+          stagger: 0.15, 
           ease: 'power3.out' 
         },
-        3.2,
+        4.0,
       );
     }, container);
 
@@ -139,21 +139,21 @@ const ScrollSequence: React.FC = () => {
       </div>
 
       {/* 3D Coins Layer — translated by GSAP but NOT scaled */}
-      <div ref={coinsContainerRef} className="absolute inset-0 z-40 pointer-events-none">
+      <div ref={coinsContainerRef} className="absolute inset-0 z-40 pointer-events-none preserve-color">
         <div className="relative h-full w-full">
           <CoinsScene />
         </div>
       </div>
 
-      {/* Feature Cards Layer (left-aligned) */}
+      {/* Bento Grid Layer (left-aligned) */}
       <div className="absolute inset-0 z-30 pointer-events-none flex items-center justify-start md:pl-24">
-        <div ref={cardsRef} className="flex gap-4 items-center">
-          <FeatureCards />
+        <div ref={cardsRef} className="flex gap-4 items-center w-full h-full">
+          <BentoGrid />
         </div>
       </div>
 
       {/* iPhone Mockup Layer (anchored to bottom fold, then moves right) */}
-      <div ref={phoneRef} className="absolute inset-x-0 bottom-0 z-20 flex items-end justify-center pointer-events-none translate-y-[20%]">
+      <div ref={phoneRef} className="absolute left-[1%] w-full bottom-0 z-20 flex items-end justify-center pointer-events-none translate-y-[20%] preserve-color">
         <IPhoneMockup />
       </div>
 
@@ -169,12 +169,12 @@ const ScrollSequence: React.FC = () => {
 
       {/* Feature Title Layer B (left side, appears after IntroTitle) */}
       <div ref={titleBRef} className="absolute inset-0 z-30 pointer-events-none flex flex-col justify-center px-8 md:px-16 lg:px-24">
-        <div className="max-w-xl">
-          <h2 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-[1.05] mb-6">
-            <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60">One Wallet.</span> <br/>
-            <span className="bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(251,191,36,0.2)]">Every Chain.</span>
+        <div className="max-w-3xl">
+          <h2 className="text-6xl md:text-8xl lg:text-[9rem] font-extrabold tracking-tighter leading-[1.0] mb-6 preserve-color">
+            <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#FDF3DC] to-[#E8B84B]">PRIVATE PAYMENTS</span> <br/>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E8B84B] via-[#D4A042] to-[#B8791F]">FULLY YOURS.</span>
           </h2>
-          <div className="flex items-center gap-4 bg-white/5 border border-white/10 rounded-full py-2 px-4 w-fit backdrop-blur-md">
+          <div className="flex items-center gap-4 bg-white/5 border border-white/10 rounded-full py-2 px-4 w-fit">
             <span className="text-sm font-medium text-gray-300">Seamless Cross-Chain Freedom</span>
             <div className="flex -space-x-2">
               <div className="w-6 h-6 rounded-full bg-amber-500/20 flex items-center justify-center border border-amber-500/50">

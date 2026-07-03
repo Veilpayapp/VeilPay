@@ -18,6 +18,7 @@ const SmoothScroll: React.FC<SmoothScrollProps> = ({ children }) => {
       wheelMultiplier: 1,
     });
     lenisRef.current = lenis;
+    (window as any).lenis = lenis;
 
     // Connect GSAP ScrollTrigger to Lenis
     lenis.on('scroll', ScrollTrigger.update);

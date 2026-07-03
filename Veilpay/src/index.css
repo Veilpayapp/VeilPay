@@ -80,3 +80,25 @@ html, body, #root {
 .animate-dust {
   animation: dust linear infinite;
 }
+
+/* Light Mode Filter Magic */
+html.light-mode {
+  filter: invert(1) hue-rotate(180deg);
+  background: white;
+}
+
+/* Preserve original colors for specific elements if needed by double inverting */
+html.light-mode .preserve-color {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* Glassmorphism that looks like white glass in BOTH Dark and Light modes */
+.glass-panel {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.01) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+html.light-mode .glass-panel {
+  /* Provide dark glass, which math mathematically inverts to white glass */
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.07) 0%, rgba(0, 0, 0, 0.01) 100%);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}

@@ -3,8 +3,11 @@ import { AnimatePresence } from 'framer-motion';
 import Preloader from './components/Preloader';
 import GlassNavbar from './components/GlassNavbar';
 import ScrollSequence from './components/ScrollSequence';
-import ChatPaySection from './components/ChatPaySection';
+import MassiveTextScroll from './components/MassiveTextScroll';
+import DownloadSection from './components/DownloadSection';
+import SqueezeFooterReveal from './components/SqueezeFooterReveal';
 import BrutalistFooter from './components/BrutalistFooter';
+import ThemeToggle from './components/ThemeToggle';
 import SmoothScroll from './components/SmoothScroll';
 import NoiseOverlay from './components/NoiseOverlay';
 import './App.css';
@@ -26,12 +29,13 @@ function App() {
         ) : (
           <>
             <SmoothScroll>
-              <div key="main" className="relative">
+              <SqueezeFooterReveal footer={<BrutalistFooter />}>
                 <GlassNavbar />
+                <ThemeToggle />
                 <ScrollSequence />
-                <ChatPaySection />
-                <BrutalistFooter />
-              </div>
+                <MassiveTextScroll />
+                <DownloadSection />
+              </SqueezeFooterReveal>
             </SmoothScroll>
           </>
         )}

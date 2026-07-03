@@ -3,45 +3,57 @@ import { motion } from 'framer-motion';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
+import { SparklesCore } from './ui/SparklesCore';
 
 const FOOTER_DATA = [
   {
-    title: 'Ecosystem',
+    title: 'Platform',
     links: [
-      { label: 'Chains', href: '#' },
-      { label: 'Tokens', href: '#' },
-      { label: 'Network Status', href: '#' },
+      { label: 'Features', href: '#features' },
+      { label: 'Security', href: '#' },
+      { label: 'Download APK', href: '#download' },
     ],
   },
   {
-    title: 'Resources',
+    title: 'Company',
     links: [
-      { label: 'Docs', href: '#' },
-      { label: 'Whitepaper', href: '#' },
-      { label: 'APIs', href: '#' },
+      { label: 'About Us', href: '#' },
+      { label: 'Privacy Policy', href: '#' },
+      { label: 'Terms of Service', href: '#' },
     ],
   },
   {
-    title: 'Connect',
+    title: 'Developers',
     links: [
-      { label: 'X (Twitter)', href: '#' },
-      { label: 'Discord', href: '#' },
-      { label: 'Support', href: '#' },
+      { label: 'API Documentation', href: '#' },
+      { label: 'GitHub', href: '#' },
+      { label: 'Contact Devs', href: '#' },
     ],
   },
 ];
 
 const BrutalistFooter: React.FC = () => {
   return (
-    <footer className="relative z-40 w-full bg-black text-white overflow-hidden">
-      <div className="w-full border-t border-white/10" />
+    <footer className="relative w-full h-screen flex flex-col justify-between bg-black text-white overflow-hidden pt-20 border-t border-white/10">
+      {/* Background Sparkles */}
+      <div className="absolute inset-0 z-0 w-full h-full pointer-events-auto">
+        <SparklesCore
+          id="footer-sparkles"
+          background="transparent"
+          minSize={0.4}
+          maxSize={1.5}
+          particleDensity={800}
+          className="w-full h-full opacity-80 cursor-default"
+          particleColor="#F2C572" 
+        />
+      </div>
 
       <motion.div 
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 py-24 md:grid-cols-[1fr_2fr] md:px-12"
+        className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 py-24 md:grid-cols-[1fr_2fr] md:px-12"
       >
         <div className="flex flex-col h-full items-start justify-between gap-8">
           <h3 className="text-3xl font-bold tracking-tight leading-tight text-white max-w-[250px]">
@@ -49,7 +61,7 @@ const BrutalistFooter: React.FC = () => {
           </h3>
           
           <div className="w-full max-w-xs space-y-3">
-            <h4 className="text-sm font-semibold text-gray-400">Join the Waitlist</h4>
+            <h4 className="text-sm font-semibold text-gray-400">Contact the Devs</h4>
             <div className="flex gap-2">
               <Input 
                 type="email" 
@@ -94,11 +106,11 @@ const BrutalistFooter: React.FC = () => {
       </motion.div>
 
       <motion.div 
-        initial={{ opacity: 0, scale: 0.95 }}
+        initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 1, delay: 0.5 }}
-        className="mx-auto w-full max-w-7xl px-6 md:px-12"
+        className="relative z-10 w-full mt-10 flex justify-center"
       >
         <a
           href="#"
@@ -106,10 +118,12 @@ const BrutalistFooter: React.FC = () => {
           aria-label="VeilPay"
         >
           <span
-            className="inline-block font-black tracking-tighter text-transparent transition-all duration-700 ease-in-out group-hover:bg-gradient-to-r group-hover:from-amber-300 group-hover:via-amber-500 group-hover:to-amber-700 group-hover:bg-clip-text group-hover:text-transparent group-hover:drop-shadow-[0_0_30px_rgba(251,191,36,0.3)]"
+            className="inline-block font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-[#F2C572] from-[15%] via-[#5E3B09] via-[50%] to-[#0A0A0A] to-[90%] uppercase"
             style={{
-              fontSize: 'clamp(4rem, 16vw, 14rem)',
-              WebkitTextStroke: '1px rgba(255,255,255,0.2)',
+              fontSize: '24vw', // Edge to edge on all screens
+              lineHeight: 0.8,
+              filter: 'drop-shadow(0px 0px 150px rgba(0,0,0,1)) drop-shadow(0px 50px 80px rgba(0,0,0,1)) drop-shadow(0px 20px 40px rgba(0,0,0,0.9))',
+              willChange: 'filter'
             }}
           >
             VEILPAY
@@ -117,7 +131,7 @@ const BrutalistFooter: React.FC = () => {
         </a>
       </motion.div>
 
-      <div className="mx-auto mt-16 flex max-w-7xl flex-col items-center justify-between gap-4 border-t border-white/10 px-6 py-8 sm:flex-row md:px-12">
+      <div className="mx-auto mt-16 flex max-w-7xl flex-col items-center justify-between gap-4 border-t border-white/10 px-6 py-8 sm:flex-row md:px-12 relative z-10">
         <span className="text-xs text-neutral-500">
           &copy; 2026 VeilPay. All rights reserved.
         </span>

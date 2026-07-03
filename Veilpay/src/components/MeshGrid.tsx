@@ -24,8 +24,8 @@ const MeshGrid: React.FC = () => {
               y1="0"
               x2="60"
               y2="0"
-              stroke="#2e2311"
-              strokeWidth="0.5"
+              stroke="rgba(255, 255, 255, 0.12)"
+              strokeWidth="1"
             />
             {/* Vertical lines */}
             <line
@@ -33,8 +33,8 @@ const MeshGrid: React.FC = () => {
               y1="0"
               x2="0"
               y2="60"
-              stroke="#2e2311"
-              strokeWidth="0.5"
+              stroke="rgba(255, 255, 255, 0.12)"
+              strokeWidth="1"
             />
           </pattern>
           <pattern
@@ -43,7 +43,7 @@ const MeshGrid: React.FC = () => {
             height="20"
             patternUnits="userSpaceOnUse"
           >
-            <circle cx="10" cy="10" r="0.5" fill="#453315" opacity="0.6" />
+            <circle cx="10" cy="10" r="1" fill="rgba(255, 255, 255, 0.25)" />
           </pattern>
         </defs>
         {/* Base background */}

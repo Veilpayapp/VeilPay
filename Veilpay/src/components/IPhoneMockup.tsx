@@ -2,10 +2,10 @@ import React from 'react';
 
 const IPhoneMockup: React.FC = () => {
   return (
-    <div className="relative z-20 flex justify-center drop-shadow-[0_30px_50px_rgba(0,0,0,0.8)]">
+    <div className="relative z-20 flex justify-center">
       <div className="relative w-[1200px] md:w-[1800px] flex justify-center items-center">
         <img 
-          src="/mockup.png" 
+          src="/MOCKUP2.png" 
           alt="iPhone Mockup" 
           className="w-full h-auto object-contain relative z-10"
         />
