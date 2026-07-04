@@ -1,11 +1,10 @@
 const CRYPTO_LOGOS = [
-  '/cryptos/btc.svg',
+  '/cryptos/xlm.svg',
   '/cryptos/eth.svg',
   '/cryptos/sol.svg',
-  '/cryptos/ltc.svg',
+  '/cryptos/xmr.svg',
+  '/cryptos/zec.svg',
   '/cryptos/bnb.svg',
-  '/cryptos/xrp.svg',
-  '/cryptos/xlm.svg',
 ];
 
 let availableIndices: number[] = [];

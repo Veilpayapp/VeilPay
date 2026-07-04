@@ -174,18 +174,14 @@ const ScrollSequence: React.FC = () => {
             <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#FDF3DC] to-[#E8B84B]">PRIVATE PAYMENTS</span> <br/>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E8B84B] via-[#D4A042] to-[#B8791F]">FULLY YOURS.</span>
           </h2>
-          <div className="flex items-center gap-4 bg-white/5 border border-white/10 rounded-full py-2 px-4 w-fit">
-            <span className="text-sm font-medium text-gray-300">Seamless Cross-Chain Freedom</span>
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-4 w-fit">
+            <span className="text-[10px] font-semibold text-gray-400 tracking-wider uppercase">Stealth payments across 8+ chains</span>
             <div className="flex -space-x-2">
-              <div className="w-6 h-6 rounded-full bg-amber-500/20 flex items-center justify-center border border-amber-500/50">
-                <img src="/cryptos/btc.svg" alt="BTC" className="w-4 h-4" />
-              </div>
-              <div className="w-6 h-6 rounded-full bg-amber-500/20 flex items-center justify-center border border-amber-500/50">
-                <img src="/cryptos/eth.svg" alt="ETH" className="w-4 h-4" />
-              </div>
-              <div className="w-6 h-6 rounded-full bg-amber-500/20 flex items-center justify-center border border-amber-500/50">
-                <img src="/cryptos/sol.svg" alt="SOL" className="w-4 h-4" />
-              </div>
+              {['xlm', 'eth', 'sol', 'xmr', 'zec'].map((coin) => (
+                <div key={coin} className="w-5 h-5 rounded-full bg-black border border-white/20 p-0.5 z-10">
+                  <img src={`/cryptos/${coin}.svg`} alt={coin} className="w-full h-full" />
+                </div>
+              ))}
             </div>
           </div>
         </div>

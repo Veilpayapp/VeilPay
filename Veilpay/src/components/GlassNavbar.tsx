@@ -47,46 +47,28 @@ export default function GlassNavbar() {
             style={{
               width: '40px',
               height: '40px',
-              background: 'url(/image.png)',
-              backgroundColor: '#ffffff',
+              backgroundImage: 'url(/image.png)',
+              backgroundColor: 'transparent',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
               borderRadius: '50%',
-              boxShadow: '0 0 20px rgba(255,255,255,0.1)'
+              boxShadow: 'none'
             }}
           />
           
           {/* Nav Links */}
-          <div className="flex items-center gap-6 ml-2">
-            <a 
-              href="#home" 
-              onClick={(e) => handleScroll(e, 0)} 
-              className="text-[13px] font-semibold text-white/70 hover:text-white transition-colors tracking-wide uppercase"
-            >
-              Home
-            </a>
-            <a 
-              href="#features" 
-              onClick={(e) => handleScroll(e, 11500)} 
-              className="text-[13px] font-semibold text-white/70 hover:text-white transition-colors tracking-wide uppercase"
-            >
-              Features
-            </a>
-            <a 
-              href="#contact" 
-              onClick={(e) => handleScroll(e, '#contact')}
-              className="text-[13px] font-semibold text-white/70 hover:text-white transition-colors tracking-wide uppercase"
-            >
-              Contact
-            </a>
+          <div className="hidden md:flex items-center gap-10">
+            <a href="#" className="text-[13px] font-semibold text-white/70 hover:text-white transition-colors tracking-wide uppercase">Home</a>
+            <a href="#features" onClick={(e) => handleScroll(e, '#features')} className="text-[13px] font-semibold text-white/70 hover:text-white transition-colors tracking-wide uppercase">Privacy</a>
+            <a href="#download" onClick={(e) => handleScroll(e, '#download')} className="text-[13px] font-semibold text-white/70 hover:text-white transition-colors tracking-wide uppercase">Contact</a>
           </div>
         </div>
 
         {/* Right Section (Action Buttons) */}
         <div className="flex items-center gap-3 relative z-10">
           <button className="text-[12px] font-bold text-white hover:text-amber-400 transition-colors tracking-wide uppercase px-4 py-2 rounded-full border border-white/20 hover:border-amber-400/50 bg-white/5">
-            DOCUMENTS
+            DOCS
           </button>
           <button 
             onClick={(e) => handleScroll(e, '#download')}

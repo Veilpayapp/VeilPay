@@ -94,7 +94,7 @@ const WaitlistSection: React.FC = () => {
             Join our waitlist!
           </h3>
           <p className="text-gray-400 text-sm md:text-base max-w-md mx-auto mb-10 font-light relative z-10">
-            Sign up for our newsletter to receive the latest updates and insights straight to your inbox.
+            Download the VeilPay beta and start sending Stellar privacy payments, Monero, Zcash and Midnight with stealth addresses and zero-knowledge proofs.
           </p>
 
           <form onSubmit={handleSubmit} className="w-full max-w-lg flex flex-col sm:flex-row gap-4 relative z-10">

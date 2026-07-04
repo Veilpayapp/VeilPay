@@ -10,18 +10,18 @@ const IPhoneMockup: React.FC = () => {
           className="w-full h-auto object-contain relative z-10"
         />
         {/* Screen Content - logo appears via GSAP */}
-        <div className="screen-logo absolute inset-0 flex items-center justify-center z-20 pointer-events-none mb-[2%] opacity-0">
+        <div className="screen-logo absolute inset-0 flex items-center justify-center z-20 pointer-events-none -mt-[10%] opacity-0">
           <div 
             style={{
               width: '180px',
               height: '180px',
-              background: 'url(/image.png)',
-              backgroundColor: '#ffffff',
+              backgroundImage: 'url(/image.png)',
+              backgroundColor: 'transparent',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
               borderRadius: '50%',
-              boxShadow: '0 0 30px rgba(255,255,255,0.4)'
+              boxShadow: 'none'
             }}
           />
         </div>

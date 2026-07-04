@@ -1,16 +1,15 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+
+import { ArrowUpRight } from 'lucide-react';
 import { SparklesCore } from './ui/SparklesCore';
 
 const FOOTER_DATA = [
   {
     title: 'Platform',
     links: [
-      { label: 'Features', href: '#features' },
-      { label: 'Security', href: '#' },
+      { label: 'Privacy', href: '#features' },
+      { label: 'Stealth Addresses', href: '#' },
       { label: 'Download APK', href: '#download' },
       { label: 'Waitlist', href: '#waitlist' },
     ],
@@ -35,7 +34,7 @@ const FOOTER_DATA = [
 
 const BrutalistFooter: React.FC = () => {
   return (
-    <footer className="relative w-full h-screen flex flex-col justify-between bg-black text-white overflow-hidden pt-20 border-t border-white/10">
+    <footer className="relative w-full min-h-screen flex flex-col justify-between bg-black text-white overflow-hidden pt-20 border-t border-white/10">
       {/* Background Sparkles */}
       <div className="absolute inset-0 z-0 w-full h-full pointer-events-auto">
         <SparklesCore
@@ -54,29 +53,32 @@ const BrutalistFooter: React.FC = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 py-24 md:grid-cols-[1fr_2fr] md:px-12"
+        className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 gap-16 px-6 py-24 lg:grid-cols-2 md:px-12"
       >
-        <div className="flex flex-col h-full items-start justify-between gap-8">
-          <h3 className="text-3xl font-bold tracking-tight leading-tight text-white max-w-[250px]">
-            Experience the new standard.
-          </h3>
+        <div className="flex flex-col justify-start gap-12">
+          <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter text-white">
+            Privacy is the new standard.
+          </h2>
           
-          <div className="w-full max-w-xs space-y-3">
-            <h4 className="text-sm font-semibold text-gray-400">Contact the Devs</h4>
-            <div className="flex gap-2">
-              <Input 
+          <div className="flex flex-col gap-5">
+            <div className="flex items-center gap-3 text-sm font-semibold tracking-wide text-neutral-300">
+              <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse" />
+              Join the beta
+            </div>
+            <div className="flex w-full max-w-md items-center border border-white/20 rounded-full bg-white/5 p-1.5 backdrop-blur-md focus-within:border-amber-500/50 transition-colors">
+              <input 
                 type="email" 
-                placeholder="Enter your email" 
-                className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus-visible:ring-amber-500 focus-visible:border-amber-500 rounded-lg"
+                placeholder="Enter your email for beta access" 
+                className="w-full bg-transparent border-none outline-none text-white placeholder-white/40 font-medium px-5 py-2"
               />
-              <Button size="icon" className="bg-amber-500 hover:bg-amber-600 text-black rounded-lg">
-                <ArrowRight className="h-4 w-4" />
-              </Button>
+              <button className="flex items-center justify-center p-3 bg-white text-black rounded-full hover:bg-neutral-200 hover:-rotate-12 transition-all">
+                <ArrowUpRight className="w-5 h-5" />
+              </button>
             </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-10 sm:grid-cols-3">
+        <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:pl-12 pt-4">
           {FOOTER_DATA.map((col, idx) => (
             <motion.div 
               key={col.title}
@@ -84,12 +86,12 @@ const BrutalistFooter: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1 + 0.3 }}
-              className="flex flex-col gap-5"
+              className="flex flex-col gap-6"
             >
               <h4 className="text-xs font-bold uppercase tracking-widest text-amber-500/80">
                 {col.title}
               </h4>
-              <ul className="flex flex-col gap-3">
+              <ul className="flex flex-col gap-4">
                 {col.links.map((link) => (
                   <li key={link.label}>
                     <a
