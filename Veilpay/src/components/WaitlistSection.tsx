@@ -42,7 +42,7 @@ const WaitlistSection: React.FC = () => {
           Accept: 'application/json'
         },
         body: JSON.stringify({
-          access_key: 'YOUR_ACCESS_KEY_HERE', // <-- USER MUST REPLACE THIS
+          access_key: '9f8b1963-4043-4610-8084-f89a4a274634',
           subject: 'New Waitlist Sign Up for VeilPay',
           from_name: 'VeilPay Waitlist',
           message: `${email} is interested in your app! They have joined the waitlist.`,
