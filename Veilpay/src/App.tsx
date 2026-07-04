@@ -5,6 +5,7 @@ import GlassNavbar from './components/GlassNavbar';
 import ScrollSequence from './components/ScrollSequence';
 import MassiveTextScroll from './components/MassiveTextScroll';
 import DownloadSection from './components/DownloadSection';
+import WaitlistSection from './components/WaitlistSection';
 import SqueezeFooterReveal from './components/SqueezeFooterReveal';
 import BrutalistFooter from './components/BrutalistFooter';
 import ThemeToggle from './components/ThemeToggle';
@@ -35,6 +36,7 @@ function App() {
                 <ScrollSequence />
                 <MassiveTextScroll />
                 <DownloadSection />
+                <WaitlistSection />
               </SqueezeFooterReveal>
             </SmoothScroll>
           </>

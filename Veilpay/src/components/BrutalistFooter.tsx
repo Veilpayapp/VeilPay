@@ -12,6 +12,7 @@ const FOOTER_DATA = [
       { label: 'Features', href: '#features' },
       { label: 'Security', href: '#' },
       { label: 'Download APK', href: '#download' },
+      { label: 'Waitlist', href: '#waitlist' },
     ],
   },
   {
