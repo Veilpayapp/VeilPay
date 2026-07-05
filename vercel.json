@@ -1,0 +1,11 @@
+{
+  "buildCommand": "cd Veilpay && npm run build",
+  "outputDirectory": "Veilpay/dist",
+  "installCommand": "cd Veilpay && npm install",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
