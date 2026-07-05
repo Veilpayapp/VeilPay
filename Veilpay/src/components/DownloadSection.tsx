@@ -35,23 +35,28 @@ const DownloadSection: React.FC = () => {
     setStatus('loading');
     
     try {
-      const response = await fetch('https://api.web3forms.com/submit', {
+      // Replace this URL with your actual Discord Webhook URL
+      const DISCORD_WEBHOOK_URL = 'YOUR_DISCORD_WEBHOOK_URL_HERE';
+      
+      const response = await fetch(DISCORD_WEBHOOK_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Accept: 'application/json'
         },
         body: JSON.stringify({
-          access_key: '9f8b1963-4043-4610-8084-f89a4a274634',
-          subject: 'New Waitlist Sign Up for VeilPay',
-          from_name: 'VeilPay Waitlist',
-          message: `${email} is interested in your app! They have joined the waitlist.`,
-          email: email
+          content: null,
+          embeds: [
+            {
+              title: "🚀 New Waitlist Signup!",
+              description: `A new user has joined the VeilPay waitlist.\n\n**Email:** \`${email}\``,
+              color: 15909234, // Amber color to match VeilPay
+              timestamp: new Date().toISOString()
+            }
+          ]
         })
       });
 
-      const result = await response.json();
-      if (result.success) {
+      if (response.ok) {
         setStatus('success');
         setEmail('');
       } else {
