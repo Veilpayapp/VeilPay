@@ -1,4 +1,3 @@
-
 <div align="center"><img src="public/image.png" alt="Veilpay" width="300"><br/>
 VeilPay
 Private by Default. Multi-Chain by Design.
@@ -40,8 +39,8 @@ Solana	Non-EVM	✅ Supported
 Stellar	Non-EVM	✅ Supported
 
 Supported Assets
-<img src="assets/xlm.svg" width="32" alt="Stellar" />   <img src="assets/eth.svg" width="32" alt="Ethereum" />   <img src="assets/sol.svg" width="32" alt="Solana" />   <img src="assets/xmr.svg" width="32" alt="Monero" />   <img src="assets/zec.svg" width="32" alt="Zcash" />
-
+<img src="public/cryptos/xlm.svg" width="32" alt="Stellar" />   <img src="public/cryptos/eth.svg" width="32" alt="Ethereum" />   <img src="public/cryptos/sol.svg" width="32" alt="Solana" />   <img src="public/cryptos/xmr.svg" width="32" alt="Monero" />   <img src="public/cryptos/zec.svg" width="32" alt="Zcash" />
+|
 Send and receive privacy-native tokens alongside major chains:
 
 Monero (XMR) — The gold standard in private digital currency
