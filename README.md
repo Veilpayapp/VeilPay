@@ -31,9 +31,9 @@ Encrypted Notes	Attach encrypted metadata to transactions that only the intended
 
 -Multi-Chain Support
 Chain	Type	Status
-Ethereum	EVM L1	✅ Supported
-Base	EVM L2	✅ Supported
-Arbitrum	EVM L2	✅ Supported
+Ethereum EVM L1	✅ Supported
+Base  EVM L2	✅ Supported
+Arbitrum EVM L2	✅ Supported
 Polygon	EVM L2	✅ Supported
 Solana	Non-EVM	✅ Supported
 Stellar	Non-EVM	✅ Supported
