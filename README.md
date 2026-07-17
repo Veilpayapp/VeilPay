@@ -18,9 +18,7 @@ VeilPay is a next-generation private crypto payments platform that combines zero
 
 VeilPay is designed for users who demand financial privacy without sacrificing speed, usability, or multi-chain access.
 
-"Take back your financial privacy. Join the waitlist today to experience the fastest, most secure crypto vault on the planet." — veilpayapp.com
-
-<picture> <source media="(prefers-color-scheme: dark)" srcset="assets/veilpay-mockup-dark.webp"> <source media="(prefers-color-scheme: light)" srcset="assets/veilpay-mockup-light.webp"> <img src="assets/veilpay-mockup-light.webp" alt="Veilpay App Mockup" width="320" /> </picture>
+"Take back your financial privacy. Join the waitlist today to experience the fastest, most secure crypto vault on the planet." — www.veilpayapp.com
 Features
 -Privacy-First Transactions
 
