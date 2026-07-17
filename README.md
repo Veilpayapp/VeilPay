@@ -1,4 +1,5 @@
-<div align="center"><picture> <source media="(prefers-color-scheme: dark)" srcset="assets/veilpay-logo-dark.webp"> <source media="(prefers-color-scheme: light)" srcset="assets/veilpay-logo-light.webp"> <img src="assets/veilpay-logo-light.webp" alt="Veilpay" width="300"> </picture><br/>
+
+<div align="center"><img src="public/image.png" alt="Veilpay" width="300"><br/>
 VeilPay
 Private by Default. Multi-Chain by Design.
 Private crypto payments & anonymous donations — stealth payments across 7+ chains.
