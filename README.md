@@ -137,6 +137,6 @@ Licensed under the MIT License. See [LICENSE](LICENSE) for details.
 
 <div align="center">
 
-[Join the waitlist](https://www.veilpayapp.com)
+[Join the waitlist](https://www.veilpayapp.com/waitlist)
 
 </div>
