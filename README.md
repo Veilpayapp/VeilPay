@@ -1,11 +1,14 @@
-<div align="center"><img src="Veilpay/public/image.png" alt="Veilpay" width="300"><br/>
-VeilPay
-Private by Default. Multi-Chain by Design.
-Private crypto payments & anonymous donations — stealth payments across 7+ chains.
+<div align="center">
+<img src="Veilpay/public/image.png" alt="Veilpay" width="300">
 
-🌐 Website · 📖 Docs · 𝕏 Twitter · 💬 Discord · ✈️ Telegram
+<h1>VeilPay</h1>
+
+Private crypto payments and anonymous donations, built on stealth addressing across seven or more chains.
+
+[Website](https://www.veilpayapp.com) · [Docs](https://www.veilpayapp.com/docs) · [X](https://x.veilpayapp.com) · [Discord](https://discord.veilpayapp.com) · [Telegram](https://telegram.veilpayapp.com)
 
 <br/>
+
 <a href="https://react.dev/"><img src="https://img.shields.io/badge/Built_with-React_19-61DAFB?style=flat-square&logo=react&logoColor=white" alt="React 19" /></a>
 <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-6.0-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript 6" /></a>
 <a href="https://vite.dev/"><img src="https://img.shields.io/badge/Vite-8-646CFF?style=flat-square&logo=vite&logoColor=white" alt="Vite 8" /></a>
@@ -13,106 +16,127 @@ Private crypto payments & anonymous donations — stealth payments across 7+ cha
 <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="License: MIT" />
 
 </div>
-Overview
-VeilPay is a next-generation private crypto payments platform that combines zero-knowledge proofs, stealth addresses, and multi-chain architecture to deliver fully private transactions. Send and receive payments without revealing sender, receiver, or amount — across Ethereum, Solana, Stellar, and more.
 
-VeilPay is designed for users who demand financial privacy without sacrificing speed, usability, or multi-chain access.
+## Overview
 
-"Take back your financial privacy. Join the waitlist today to experience the fastest, most secure crypto vault on the planet." — www.veilpayapp.com
-Features
--Privacy-First Transactions
+VeilPay is a private crypto payments platform that combines zero-knowledge proofs, stealth addresses, and a multi-chain architecture to keep transaction details off the public record. Sender, receiver, and amount stay hidden across Ethereum, Solana, Stellar, and other supported chains, while the app itself stays fast enough for everyday use.
 
-Feature	Description
-Zero-Knowledge Proofs	Prove a payment is valid without revealing sender, receiver, or amount. Every transaction is cryptographically private.
-Stealth Addresses	EIP-5564 dual-key stealth addresses generate a fresh one-time address per transaction, breaking on-chain linkability across Stellar, EVM, and Solana.
-Encrypted Notes	Attach encrypted metadata to transactions that only the intended recipient can decrypt.
+The project is currently in waitlist stage at [veilpayapp.com](https://www.veilpayapp.com).
 
--Multi-Chain Support
-Chain	Type	Status
-Ethereum EVM L1	✅ Supported
-Base  EVM L2	✅ Supported
-Arbitrum EVM L2	✅ Supported
-Polygon	EVM L2	✅ Supported
-Solana	Non-EVM	✅ Supported
-Stellar	Non-EVM	✅ Supported
+## Features
 
-Supported Assets<img src="Veilpay/public/cryptos/xlm.svg" width="32" alt="Stellar" />   <img src="Veilpay/public/cryptos/eth.svg" width="32" alt="Ethereum" />   <img src="Veilpay/public/cryptos/sol.svg" width="32" alt="Solana" />   <img src="Veilpay/public/cryptos/xmr.svg" width="32" alt="Monero" />   <img src="Veilpay/public/cryptos/zec.svg" width="32" alt="Zcash" />
+### Privacy
 
-Send and receive privacy-native tokens alongside major chains:
+| Feature | Description |
+|---|---|
+| Zero-Knowledge Proofs | Validates a payment without revealing sender, receiver, or amount. |
+| Stealth Addresses | EIP-5564 dual-key stealth addresses generate a fresh one-time address per transaction, breaking on-chain linkability across Stellar, EVM, and Solana. |
+| Encrypted Notes | Attach encrypted metadata to a transaction that only the recipient can decrypt. |
 
-Monero (XMR) — The gold standard in private digital currency
-Zcash (ZEC) — Selective disclosure with zk-SNARKs
-Midnight — Cardano's privacy-focused sidechain
-Stellar Private Payments — Native privacy layer on StellarConsumer App
-Unified Vault — One wallet for all your private and public assets
-Fiat Ramps — On/off-ramp between fiat and crypto seamlessly
-WalletConnect — Connect to dApps with privacy-preserving session management
-Send / Receive Flows — Intuitive UX for private payments
-Anonymous Donations — Donate privately without exposing your wallet history
+### Chains
 
-Architecture text
+| Chain | Type | Status |
+|---|---|---|
+| Ethereum | EVM L1 | Supported |
+| Base | EVM L2 | Supported |
+| Arbitrum | EVM L2 | Supported |
+| Polygon | EVM L2 | Supported |
+| Solana | Non-EVM | Supported |
+| Stellar | Non-EVM | Supported |
 
+### Assets
+
+<p>
+<img src="Veilpay/public/cryptos/xlm.svg" width="32" alt="Stellar">
+<img src="Veilpay/public/cryptos/eth.svg" width="32" alt="Ethereum">
+<img src="Veilpay/public/cryptos/sol.svg" width="32" alt="Solana">
+<img src="Veilpay/public/cryptos/xmr.svg" width="32" alt="Monero">
+<img src="Veilpay/public/cryptos/zec.svg" width="32" alt="Zcash">
+</p>
+
+Alongside major chains, VeilPay supports privacy-native assets:
+
+- **Monero (XMR)**: established private digital currency.
+- **Zcash (ZEC)**: selective disclosure via zk-SNARKs.
+- **Midnight**: Cardano's privacy-focused sidechain.
+- **Stellar Private Payments**: native privacy layer on Stellar.
+
+### Consumer App
+
+- **Unified vault**: one wallet for public and private assets.
+- **Fiat ramps**: on/off-ramp between fiat and crypto.
+- **WalletConnect**: connect to dApps with privacy-preserving sessions.
+- **Send and receive flows**: straightforward UX for private payments.
+- **Anonymous donations**: donate without exposing wallet history.
+
+## Architecture
+
+```
 Veilpay/
-├── api/                # Serverless API routes (Vercel)
-├── public/             # Static assets & images
-├── scripts/            # Build & utility scripts
-├── src/                # Application source code
-│   ├── components/     # Reusable UI components
-│   ├── pages/          # Route-level page components
-│   ├── hooks/          # Custom React hooks
-│   └── lib/            # Utilities & helpers
-└── veilpay-docs/       # Comprehensive documentation
-    ├── architecture/   # Protocol overview & design docs
-    ├── chains/         # Per-chain integration guides
-    ├── consumer-app/   # App feature documentation
-    ├── getting-started/ # Quickstart & setup guides
-    ├── privacy/        # ZK proofs, stealth addresses, encrypted notes
-    └── security/       # API hardening & secrets management
-    
-Tech Stack
-Layer	Technology
-Framework	React 19 + TypeScript 6
-Build Tool	Vite 8
-Styling	Tailwind CSS 4
-Animations	Framer Motion, GSAP
-3D Graphics	Three.js (React Three Fiber)
-Routing	React Router DOM 7
-Icons	Lucide React, Radix UI Icons
-Backend	Vercel Serverless Functions
-Database	PostgreSQL + Redis
-Testing	Vitest
+├── api/                  # Serverless API routes (Vercel)
+├── public/               # Static assets and images
+├── scripts/              # Build and utility scripts
+├── src/
+│   ├── components/       # Reusable UI components
+│   ├── pages/            # Route-level page components
+│   ├── hooks/            # Custom React hooks
+│   └── lib/              # Utilities and helpers
+└── veilpay-docs/
+    ├── architecture/     # Protocol overview and design docs
+    ├── chains/           # Per-chain integration guides
+    ├── consumer-app/     # App feature documentation
+    ├── getting-started/  # Quickstart and setup guides
+    ├── privacy/          # ZK proofs, stealth addresses, encrypted notes
+    └── security/         # API hardening and secrets management
+```
 
+## Tech Stack
 
-📚 Documentation
-Comprehensive documentation lives in veilpay-docs/:
-and Veilpayapp.com/docs
+| Layer | Technology |
+|---|---|
+| Framework | React 19, TypeScript 6 |
+| Build Tool | Vite 8 |
+| Styling | Tailwind CSS 4 |
+| Animation | Framer Motion, GSAP |
+| 3D Graphics | Three.js (React Three Fiber) |
+| Routing | React Router DOM 7 |
+| Icons | Lucide React, Radix UI Icons |
+| Backend | Vercel Serverless Functions |
+| Database | PostgreSQL, Redis |
+| Testing | Vitest |
 
-Section	Path	Description
-Protocol Overview	architecture/	How Veilpay operates and the payment lifecycle
-Supported Networks	chains/	Mainnet & testnet details for each chain
-Consumer App	consumer-app/	Balances, fiat ramps, send/receive, WalletConnect
-Getting Started	getting-started/	Quickstart guide & local development setup
-Privacy	privacy/	ZK proofs, stealth addresses, encrypted notes
-Security	security/	API hardening, secrets management, security model
+## Documentation
 
- Community & Social
-Platform	Link
-🌐 Website	www.veilpayapp.com
-𝕏 X / Twitter	x.veilpayapp.com
-💬 Discord	discord.veilpayapp.com
-✈️ Telegram	telegram.veilpayapp.com
-📸 Instagram	instagram.veilpayapp.com
-💼 LinkedIn	linkedin.veilpayapp.com
-📝 Medium	veilpay.medium.com
-📰 Blog	veilpayapp.com/blogs
+Full documentation lives in `veilpay-docs/` and at [veilpayapp.com/docs](https://www.veilpayapp.com/docs).
 
-📄 License
-This project is licensed under the MIT License — see the LICENSE file for details.
+| Section | Path | Description |
+|---|---|---|
+| Protocol Overview | `architecture/` | How VeilPay operates and the payment lifecycle |
+| Supported Networks | `chains/` | Mainnet and testnet details for each chain |
+| Consumer App | `consumer-app/` | Balances, fiat ramps, send/receive, WalletConnect |
+| Getting Started | `getting-started/` | Quickstart guide and local development setup |
+| Privacy | `privacy/` | ZK proofs, stealth addresses, encrypted notes |
+| Security | `security/` | API hardening, secrets management, security model |
+
+## Community
+
+| Platform | Link |
+|---|---|
+| Website | [veilpayapp.com](https://www.veilpayapp.com) |
+| X / Twitter | [x.veilpayapp.com](https://x.veilpayapp.com) |
+| Discord | [discord.veilpayapp.com](https://discord.veilpayapp.com) |
+| Telegram | [telegram.veilpayapp.com](https://telegram.veilpayapp.com) |
+| Instagram | [instagram.veilpayapp.com](https://instagram.veilpayapp.com) |
+| LinkedIn | [linkedin.veilpayapp.com](https://linkedin.veilpayapp.com) |
+| Medium | [veilpay.medium.com](https://veilpay.medium.com) |
+| Blog | [veilpayapp.com/blogs](https://www.veilpayapp.com/blogs) |
+
+## License
+
+Licensed under the MIT License. See [LICENSE](LICENSE) for details.
 
 <div align="center">
-🔐 Private payments. Fully yours.
-Join the Waitlist →
 
-⭐ Star this repo to show your support!
+[Join the waitlist](https://www.veilpayapp.com)
 
 </div>
